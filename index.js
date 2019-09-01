@@ -10,6 +10,7 @@ class Neighborhood {
   constructor (name) {
     this.name = name;
     this.id = ++neighborhoodIdCount;
+    store.neighborhoods.push(this);
   }
   deliveries() {}
   customers() {}
@@ -21,6 +22,7 @@ class Customer {
     this.name = name;
     this.id = ++customerIdCount;
     this.neighborhoodId = neighborhoodId;
+    store.customers.push(this);
   }
   deliveries(){}
   meals(){}
@@ -32,6 +34,7 @@ class Meal {
     this.title = title;
     this.price = price;
     this.id = ++mealIdCount;
+    store.meals.push(this);
   }
   deliveries(){}
   customers(){}
@@ -44,8 +47,15 @@ class Delivery {
     this.neighborhoodId = neighborhoodId;
     this.customerId = customerId;
     this.id = ++deliveryIdCount;
+    store.deliveries.push(this);
   }
-  meal(){}
-  customer(){}
-  neighborhood(){}
+  meal(){
+    return store.meals.find(meal => meal.id === this.mealId)
+  }
+  customer(){
+    return store.customers.find(customer => customer.id === this.customerId)
+  }
+  neighborhood(){
+    return store.neighborhoods.find(neighborhood => neighborhood.id === this.neighborhoodId)
+  }
 }
