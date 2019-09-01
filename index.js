@@ -19,9 +19,15 @@ class Neighborhood {
   customers() {
     return this.deliveries()
       .map(delivery => store.customers
-        .find(customer => customer.id === delivery.customerId));
+        .find(customer => customer.id === delivery.customerId))
+      .filter(onlyUnique)
   }
-  meals() {}
+  meals() {
+    return this.deliveries()
+      .map(delivery => store.meals
+        .find(meal => meal.id === delivery.mealId))
+      .filter(onlyUnique)
+  }
 }
 
 class Customer {
@@ -86,4 +92,11 @@ class Delivery {
   neighborhood(){
     return store.neighborhoods.find(neighborhood => neighborhood.id === this.neighborhoodId)
   }
+}
+
+//helper functions
+
+//function to use in filter to return unique values
+function onlyUnique(value, index, self) { 
+  return self.indexOf(value) === index;
 }
