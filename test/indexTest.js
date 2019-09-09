@@ -120,146 +120,146 @@ describe('index.js', () => {
     });
   });
 
-  describe('Object Relationships', () => {
-    let redHook;
-    let guy;
-    let marioBatali;
-    let friedCheesecake;
-    let macAndCheese;
-    let flavortownDelivery;
-    let guysAmericanDelivery;
-    let guysDuplicateDelivery;
-    let batalisDessert;
-    beforeEach(() => {
-      store = { neighborhoods: [], meals: [], customers: [], deliveries: [] };
-      redHook = new Neighborhood('Red Hook');
-      guy = new Customer('Guy Fieri', redHook.id);
-      marioBatali = new Customer('Iron Chef Mario Batali', redHook.id);
-      friedCheesecake = new Meal('Fried Cheesecake', 30);
-      macAndCheese = new Meal('Fried Macaroni and Cheese', 15);
-      flavortownDelivery = new Delivery(friedCheesecake.id, redHook.id, guy.id);
-      guysAmericanDelivery = new Delivery(macAndCheese.id, redHook.id, guy.id);
-      guysDuplicateDelivery = new Delivery(macAndCheese.id, redHook.id, guy.id);
-      batalisDessert = new Delivery(friedCheesecake.id, redHook.id, marioBatali.id);
-    });
+  // describe('Object Relationships', () => {
+  //   let redHook;
+  //   let guy;
+  //   let marioBatali;
+  //   let friedCheesecake;
+  //   let macAndCheese;
+  //   let flavortownDelivery;
+  //   let guysAmericanDelivery;
+  //   let guysDuplicateDelivery;
+  //   let batalisDessert;
+  //   beforeEach(() => {
+  //     store = { neighborhoods: [], meals: [], customers: [], deliveries: [] };
+  //     redHook = new Neighborhood('Red Hook');
+  //     guy = new Customer('Guy Fieri', redHook.id);
+  //     marioBatali = new Customer('Iron Chef Mario Batali', redHook.id);
+  //     friedCheesecake = new Meal('Fried Cheesecake', 30);
+  //     macAndCheese = new Meal('Fried Macaroni and Cheese', 15);
+  //     flavortownDelivery = new Delivery(friedCheesecake.id, redHook.id, guy.id);
+  //     guysAmericanDelivery = new Delivery(macAndCheese.id, redHook.id, guy.id);
+  //     guysDuplicateDelivery = new Delivery(macAndCheese.id, redHook.id, guy.id);
+  //     batalisDessert = new Delivery(friedCheesecake.id, redHook.id, marioBatali.id);
+  //   });
 
-    describe('Neighborhood', () => {
-      describe('deliveries()', () => {
-        it('returns all unique deliveries associated with a particular neighborhood', () => {
-          expect(redHook.deliveries()).to.deep.equal([
-            flavortownDelivery,
-            guysAmericanDelivery,
-            guysDuplicateDelivery,
-            batalisDessert,
-          ]);
-        });
-      });
-      describe('customers()', () => {
-        it('returns all customer instances associated with a particular neighborhood', () => {
-          expect(redHook.customers()).to.deep.equal([guy, marioBatali]);
-        });
-      });
-    });
+  //   describe('Neighborhood', () => {
+  //     describe('deliveries()', () => {
+  //       it('returns all unique deliveries associated with a particular neighborhood', () => {
+  //         expect(redHook.deliveries()).to.deep.equal([
+  //           flavortownDelivery,
+  //           guysAmericanDelivery,
+  //           guysDuplicateDelivery,
+  //           batalisDessert,
+  //         ]);
+  //       });
+  //     });
+  //     describe('customers()', () => {
+  //       it('returns all customer instances associated with a particular neighborhood', () => {
+  //         expect(redHook.customers()).to.deep.equal([guy, marioBatali]);
+  //       });
+  //     });
+  //   });
 
-    describe('Delivery', () => {
-      describe('meal()', () => {
-        it('returns the meal instance associated with a particular delivery; delivery belongs to a meal', () => {
-          expect(batalisDessert.meal()).to.equal(friedCheesecake);
-        });
-      });
-      describe('customer()', () => {
-        it('returns the customer instance associated with a particular delivery; delivery belongs to a customer', () => {
-          expect(guysAmericanDelivery.customer()).to.equal(guy);
-        });
-      });
-      describe('neighborhood()', () => {
-        it('returns the neighborhood in which a delivery was placed', () => {
-          expect(guysAmericanDelivery.neighborhood()).to.equal(redHook);
-        });
-      });
-    });
+  //   describe('Delivery', () => {
+  //     describe('meal()', () => {
+  //       it('returns the meal instance associated with a particular delivery; delivery belongs to a meal', () => {
+  //         expect(batalisDessert.meal()).to.equal(friedCheesecake);
+  //       });
+  //     });
+  //     describe('customer()', () => {
+  //       it('returns the customer instance associated with a particular delivery; delivery belongs to a customer', () => {
+  //         expect(guysAmericanDelivery.customer()).to.equal(guy);
+  //       });
+  //     });
+  //     describe('neighborhood()', () => {
+  //       it('returns the neighborhood in which a delivery was placed', () => {
+  //         expect(guysAmericanDelivery.neighborhood()).to.equal(redHook);
+  //       });
+  //     });
+  //   });
 
-    describe('Customer', () => {
-      describe('deliveries()', () => {
-        it('returns all deliveries a customer has placed', () => {
-          expect(guy.deliveries()).to.deep.equal([
-            flavortownDelivery,
-            guysAmericanDelivery,
-            guysDuplicateDelivery,
-          ]);
-        });
-      });
+  //   describe('Customer', () => {
+  //     describe('deliveries()', () => {
+  //       it('returns all deliveries a customer has placed', () => {
+  //         expect(guy.deliveries()).to.deep.equal([
+  //           flavortownDelivery,
+  //           guysAmericanDelivery,
+  //           guysDuplicateDelivery,
+  //         ]);
+  //       });
+  //     });
 
-      describe('meals()', () => {
-        it('returns all meals a customer has ordered', () => {
-          expect(guy.meals()).to.deep.equal([friedCheesecake, macAndCheese, macAndCheese]);
-        });
-      });
-    });
+  //     describe('meals()', () => {
+  //       it('returns all meals a customer has ordered', () => {
+  //         expect(guy.meals()).to.deep.equal([friedCheesecake, macAndCheese, macAndCheese]);
+  //       });
+  //     });
+  //   });
 
-    describe('Meal', () => {
-      describe('deliveries()', () => {
-        it('returns all deliveries associated with a given meal', () => {
-          expect(macAndCheese.deliveries()).to.deep.equal([
-            guysAmericanDelivery,
-            guysDuplicateDelivery,
-          ]);
-        });
-      });
-      describe('customers()', () => {
-        it('returns a unique list of customers who have ordered this meal', () => {
-          expect(friedCheesecake.customers()).to.deep.equal([guy, marioBatali]);
-        });
-      });
-    });
-  });
+  //   describe('Meal', () => {
+  //     describe('deliveries()', () => {
+  //       it('returns all deliveries associated with a given meal', () => {
+  //         expect(macAndCheese.deliveries()).to.deep.equal([
+  //           guysAmericanDelivery,
+  //           guysDuplicateDelivery,
+  //         ]);
+  //       });
+  //     });
+  //     describe('customers()', () => {
+  //       it('returns a unique list of customers who have ordered this meal', () => {
+  //         expect(friedCheesecake.customers()).to.deep.equal([guy, marioBatali]);
+  //       });
+  //     });
+  //   });
+  // });
 
-  describe('Aggregate Methods', () => {
-    let upperEast;
-    let bigSpender;
-    let lobster;
-    let turducken;
-    let fancyPizza;
-    let deliveryOne;
-    let deliveryTwo;
-    let deliveryThree;
-    let deliveryFour;
-    beforeEach(() => {
-      store = { neighborhoods: [], meals: [], customers: [], deliveries: [] };
-      upperEast = new Neighborhood('Upper East Side');
-      bigSpender = new Customer('DJ MoneyBags', upperEast.id);
-      lobster = new Meal('lobster', 500);
-      turducken = new Meal('turducken', 750);
-      fancyPizza = new Meal('fancy pizza', 600);
-      deliveryOne = new Delivery(lobster.id, upperEast.id, bigSpender.id);
-      deliveryTwo = new Delivery(turducken.id, upperEast.id, bigSpender.id);
-      deliveryThree = new Delivery(fancyPizza.id, upperEast.id, bigSpender.id);
-      deliveryFour = new Delivery(fancyPizza.id, upperEast.id, bigSpender.id);
-    });
-    describe('Meal methods', () => {
-      describe('Meal.byPrice()', () => {
-        it('orders all of the meals by price', () => {
-          expect(Meal.byPrice()[0]).to.equal(turducken);
-          expect(Meal.byPrice()[1]).to.equal(fancyPizza);
-          expect(Meal.byPrice()[2]).to.equal(lobster);
-        });
-      });
-    });
+  // describe('Aggregate Methods', () => {
+  //   let upperEast;
+  //   let bigSpender;
+  //   let lobster;
+  //   let turducken;
+  //   let fancyPizza;
+  //   let deliveryOne;
+  //   let deliveryTwo;
+  //   let deliveryThree;
+  //   let deliveryFour;
+  //   beforeEach(() => {
+  //     store = { neighborhoods: [], meals: [], customers: [], deliveries: [] };
+  //     upperEast = new Neighborhood('Upper East Side');
+  //     bigSpender = new Customer('DJ MoneyBags', upperEast.id);
+  //     lobster = new Meal('lobster', 500);
+  //     turducken = new Meal('turducken', 750);
+  //     fancyPizza = new Meal('fancy pizza', 600);
+  //     deliveryOne = new Delivery(lobster.id, upperEast.id, bigSpender.id);
+  //     deliveryTwo = new Delivery(turducken.id, upperEast.id, bigSpender.id);
+  //     deliveryThree = new Delivery(fancyPizza.id, upperEast.id, bigSpender.id);
+  //     deliveryFour = new Delivery(fancyPizza.id, upperEast.id, bigSpender.id);
+  //   });
+  //   describe('Meal methods', () => {
+  //     describe('Meal.byPrice()', () => {
+  //       it('orders all of the meals by price', () => {
+  //         expect(Meal.byPrice()[0]).to.equal(turducken);
+  //         expect(Meal.byPrice()[1]).to.equal(fancyPizza);
+  //         expect(Meal.byPrice()[2]).to.equal(lobster);
+  //       });
+  //     });
+  //   });
 
-    describe('Customer methods', () => {
-      describe('totalSpent()', () => {
-        it('calculates the total amount spent by a customer', () => {
-          expect(bigSpender.totalSpent()).to.equal(2450);
-        });
-      });
-    });
+  //   describe('Customer methods', () => {
+  //     describe('totalSpent()', () => {
+  //       it('calculates the total amount spent by a customer', () => {
+  //         expect(bigSpender.totalSpent()).to.equal(2450);
+  //       });
+  //     });
+  //   });
 
-    describe('Neighborhood methods', () => {
-      describe('meals()', () => {
-        it('returns a unique list of meals ordered in a neighborhood', () => {
-          expect(upperEast.meals().length).to.equal(3);
-        });
-      });
-    });
-  });
+  //   describe('Neighborhood methods', () => {
+  //     describe('meals()', () => {
+  //       it('returns a unique list of meals ordered in a neighborhood', () => {
+  //         expect(upperEast.meals().length).to.equal(3);
+  //       });
+  //     });
+  //   });
+  // });
 });
