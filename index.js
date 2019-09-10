@@ -13,14 +13,13 @@ class Neighborhood{
 		store.neighborhoods.push(this)
 	}
 	deliveries(){
-		// return store.deliveries.filter(function(delivery){return delivery.neighborhood === this}.bind(this))
-		return store.deliveries.filter(function(delivery){return delivery.neighborhood})
+		return [...new Set(store.deliveries.filter(function(delivery){return delivery.neighborhoodId === this.id}.bind(this)))]
 	}
 	customers(){
-		return this.deliveries.map(function(delivery){return delivery.customer})
+		return store.customers.filter(customer => customer.neighborhoodId === this.id);
 	}
 	meals(){
-		return new Set(this.deliveries.map(function(delivery){return delivery.meal}))
+		return [...new Set(this.deliveries().map(function(delivery){return delivery.meal()}))]
 	}
 }
 
@@ -32,13 +31,13 @@ class Customer{
 		store.customers.push(this)
 	}
 	deliveries(){
-		return store.deliveries.filter(function(delivery){return delivery.customer === this}.bind(this))
+		return store.deliveries.filter(function(delivery){return delivery.customerId === this.id}.bind(this))
 	}
 	meals(){
-		return new Set(this.deliveries.map(function(delivery){return delivery.meal}))
+		return this.deliveries().map(function(delivery){return delivery.meal()})
 	}
 	totalSpent(){
-
+		return this.meals().reduce(function(total, meal){return total+=meal.price},0)
 	}
 }
 
@@ -51,15 +50,15 @@ class Meal{
 	}
 
 	deliveries(){
-		return store.deliveries.filter(function(delivery){return delivery.meal === this}.bind(this))
+		return store.deliveries.filter(function(delivery){return delivery.mealId === this.id}.bind(this))
 	}
 
 	customers(){
-		return this.deliveries.map(function(delivery){return delivery.customer})
+		return this.deliveries().map(function(delivery){return delivery.customer()})
 	}
 
-	static byPrice(){
-
+	static byPrice() {
+		return store.meals.sort(function(a, b){return b.price - a.price});
 	}
 }
 
