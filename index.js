@@ -39,9 +39,12 @@ class Customer {
   }
 
 //returns all the deliveries that customer has received
-  deliveries(){
-    return store.deliveries.filter(delivery => delivery.customerId === this.id);
-  }
+  deliveries(){ return store.deliveries.filter(
+            function(delivery) {
+                return delivery.neighborhoodId === this.id;
+            }.bind(this)
+        );
+    }
 
 //returns all meals that a customer has ordered
   meals(){
