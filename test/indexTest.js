@@ -6,7 +6,7 @@ describe('index.js', () => {
     });
     it('can store meals', () => {
       expect(store.meals).to.be.instanceof(Array);
-    }); 
+    });
     it('can store customers', () => {
       expect(store.customers).to.be.instanceof(Array);
     });
